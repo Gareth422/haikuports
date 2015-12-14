@@ -20,7 +20,7 @@ REQUIRES="
 	haiku
 	"
 
-PATCHES="box2d-2.1.2.patch"
+PATCHES="box2d-2.3.1.patch"
 
 BUILD_PREREQUIRES="
 	cmd:make
