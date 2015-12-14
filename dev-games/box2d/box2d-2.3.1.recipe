@@ -13,6 +13,7 @@ SOURCE_DIR="Box2D_v2.3.1"
 
 PROVIDES="
 	box2d
+	cmd:box2d
 	"
 
 REQUIRES="
@@ -22,15 +23,16 @@ REQUIRES="
 PATCHES="box2d-2.1.2.patch"
 
 BUILD_PREREQUIRES="
-	haiku_devel
 	cmd:make
 	cmd:cmake
 	cmd:gcc
+"
+
+BUILD_REQUIRES="
+	haiku_devel
 	devel:libgl
 	devel:libglu
 "
-
-BUILD_REQUIRES=""
 
 BUILD()
 {
