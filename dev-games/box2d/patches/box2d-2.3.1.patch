@@ -16,6 +16,14 @@ diff --git a/Box2D/Testbed/CMakeLists.txt b/Box2D/Testbed/CMakeLists.txt
 index d1be5c0..ad716e4 100644
 --- a/Box2D/Testbed/CMakeLists.txt
 +++ b/Box2D/Testbed/CMakeLists.txt
+@@ -5,7 +5,5 @@
+ set(Testbed_Framework_SRCS
+ 	Framework/Main.cpp
+-	Framework/Render.cpp
+-	Framework/Render.h
+ 	Framework/Test.cpp
+ 	Framework/Test.h
+ )
 @@ -82,11 +82,19 @@ add_executable(Testbed
  	${Testbed_Tests_SRCS}
  )
@@ -44,26 +52,3 @@ index d1be5c0..ad716e4 100644
 +		${OPENGL_LIBRARIES}
 +)
 +endif(HAIKU)
-diff --git a/Box2D/Testbed/Framework/Test.cpp b/Box2D/Testbed/Framework/Test.cpp
-index 9e6a935..f43ee39 100644
---- a/Box2D/Testbed/Framework/Test.cpp
-+++ b/Box2D/Testbed/Framework/Test.cpp
-@@ -19,3 +19,6 @@
- #include "Test.h"
- #include <stdio.h>
-+#ifdef __HAIKU__
-+#include <GL/glut.h>
-+#endif
- 
-diff --git a/Box2D/Testbed/Tests/TestEntries.cpp b/Box2D/Testbed/Tests/TestEntries.cpp
-index e12c102..1ca1db1 100644
---- a/Box2D/Testbed/Tests/TestEntries.cpp
-+++ b/Box2D/Testbed/Tests/TestEntries.cpp
-@@ -18,4 +18,7 @@
- 
- #include "../Framework/Test.h"
-+#ifdef __HAIKU__
-+#include <GL/glut.h>
-+#endif
- 
- #include "AddPair.h"
