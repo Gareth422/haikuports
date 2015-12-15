@@ -1,0 +1,54 @@
+diff --git a/Box2D/CMakeLists.txt b/Box2D/CMakeLists.txt
+index a8ad550..17b3069 100644
+--- a/Box2D/CMakeLists.txt
++++ b/Box2D/CMakeLists.txt
+@@ -26,7 +26,9 @@ if(BOX2D_BUILD_EXAMPLES)
+ 
+   # Testbed and dependencies.
+   find_package(OpenGL REQUIRED)
++if(NOT HAIKU) # Haiku has glut, so no need for freeglut
+   add_subdirectory(freeglut)
+   add_subdirectory(glui)
++endif(NOT HAIKU)
+   add_subdirectory(Testbed)
+ endif(BOX2D_BUILD_EXAMPLES)
+diff --git a/Box2D/Testbed/CMakeLists.txt b/Box2D/Testbed/CMakeLists.txt
+index d1be5c0..ad716e4 100644
+--- a/Box2D/Testbed/CMakeLists.txt
++++ b/Box2D/Testbed/CMakeLists.txt
+@@ -5,7 +5,5 @@
+ set(Testbed_Framework_SRCS
+ 	Framework/Main.cpp
+-	Framework/Render.cpp
+-	Framework/Render.h
+ 	Framework/Test.cpp
+ 	Framework/Test.h
+ )
+@@ -82,11 +82,19 @@ add_executable(Testbed
+ 	${Testbed_Tests_SRCS}
+ )
+ 
+-target_link_libraries (
+-	Testbed
+-	Box2D
+-	freeglut_static
+-	glui
+-	${ADDITIONAL_LIBRARIES}
+-	${OPENGL_LIBRARIES}
+-) 
++if(HAIKU) # Haiku has glut, so no need for freeglut
++	target_link_libraries (
++		Testbed
++		Box2D
++		glui
++		${OPENGL_LIBRARIES}
++)
++else(HAIKU)
++	target_link_libraries (
++		Testbed
++		Box2D
++		freeglut_static
++		glui
++		${OPENGL_LIBRARIES}
++)
++endif(HAIKU)
